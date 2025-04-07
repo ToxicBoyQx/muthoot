@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply Muthoot Finance Font & Icon Fixes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1, h2, h3 {
+      color: #d71920;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .instructions {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-left: 4px solid #d71920;
+      margin-bottom: 20px;
+    }
+    code {
+      background-color: #f1f1f1;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: Consolas, monospace;
+    }
+    pre {
+      background-color: #f1f1f1;
+      padding: 10px;
+      overflow-x: auto;
+      border-radius: 3px;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #d71920;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+    .btn:hover {
+      background-color: #b41419;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Muthoot Finance Font & Icon Fixes</h1>
+    
+    <div class="instructions">
+      <p>This tool helps you apply font and icon fixes to make your Muthoot Finance clone 100% match the original website's design.</p>
+    </div>
+    
+    <h2>How to Apply These Fixes</h2>
+    <p>Choose one of the following methods to apply the fixes to your Muthoot Finance clone:</p>
+    
+    <h3>Method 1: Add to Each HTML File (Recommended)</h3>
+    <p>Add the following code right before the closing <code>&lt;/head&gt;</code> tag in each HTML file:</p>
+    <pre><code>&lt;!-- Font & Icon Fixes to match original website -->
+&lt;link rel="stylesheet" href="/css/font-fix.css">
+&lt;link rel="stylesheet" href="/css/icons-fix.css"></code></pre>
+    
+    <p>And add this script before the closing <code>&lt;/body&gt;</code> tag:</p>
+    <pre><code>&lt;script src="/js/font-icon-fix.js">&lt;/script></code></pre>
+    
+    <h3>Method 2: Use Automatic Fixer Script</h3>
+    <p>Add the following script before the closing <code>&lt;/head&gt;</code> tag in each HTML file:</p>
+    <pre><code>&lt;script>
+(function() {
+  // Create and append font fix CSS
+  var fontFixStyle = document.createElement('link');
+  fontFixStyle.rel = 'stylesheet';
+  fontFixStyle.href = '/css/font-fix.css';
+  document.head.appendChild(fontFixStyle);
+  
+  // Create and append icon fix CSS
+  var iconFixStyle = document.createElement('link');
+  iconFixStyle.rel = 'stylesheet';
+  iconFixStyle.href = '/css/icons-fix.css';
+  document.head.appendChild(iconFixStyle);
+  
+  // Load the full fix script
+  window.addEventListener('load', function() {
+    var script = document.createElement('script');
+    script.src = '/js/font-icon-fix.js';
+    document.body.appendChild(script);
+  });
+})();
+&lt;/script></code></pre>
+    
+    <h3>Method 3: Apply to All Files at Once with Node.js</h3>
+    <p>If you have Node.js installed, you can create a script to automatically add the fixes to all HTML files:</p>
+    <ol>
+      <li>Create a file named <code>apply-fixes.js</code> with the following content:</li>
+    </ol>
+    <pre><code>const fs = require('fs');
+const path = require('path');
+
+// Get all HTML files recursively
+function getAllHtmlFiles(dir, fileList = []) {
+  const files = fs.readdirSync(dir);
+  
+  files.forEach(file => {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    
+    if (stat.isDirectory()) {
+      getAllHtmlFiles(filePath, fileList);
+    } else if (path.extname(file).toLowerCase() === '.html') {
+      fileList.push(filePath);
+    }
+  });
+  
+  return fileList;
+}
+
+// Add the fix code to HTML files
+function addFixesToHtmlFile(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  
+  // Head content to add
+  const headContent = `
+<!-- Font & Icon Fixes to match original website -->
+<link rel="stylesheet" href="/css/font-fix.css">
+<link rel="stylesheet" href="/css/icons-fix.css">`;
+  
+  // Body content to add
+  const bodyContent = `
+<!-- Font & Icon Fix Script -->
+<script src="/js/font-icon-fix.js"></script>`;
+  
+  // Add to head
+  content = content.replace('</head>', `${headContent}\n</head>`);
+  
+  // Add to body
+  content = content.replace('</body>', `${bodyContent}\n</body>`);
+  
+  // Write back
+  fs.writeFileSync(filePath, content);
+  console.log(`Added fixes to: ${filePath}`);
+}
+
+// Start process
+const htmlFiles = getAllHtmlFiles('.');
+console.log(`Found ${htmlFiles.length} HTML files to process.`);
+
+htmlFiles.forEach(file => {
+  addFixesToHtmlFile(file);
+});
+
+console.log('Completed adding fixes to all HTML files.');</code></pre>
+
+    <ol start="2">
+      <li>Run the script with Node.js:</li>
+    </ol>
+    <pre><code>node apply-fixes.js</code></pre>
+    
+    <h2>Test the Fixes</h2>
+    <p>After applying the fixes, you can test if they're working by checking these indicators:</p>
+    <ul>
+      <li>The font should match the original Muthoot Finance website (Frutiger font)</li>
+      <li>Icons should display properly and match the original site</li>
+      <li>Font sizes and weights should be identical to the original</li>
+    </ul>
+    
+    <div class="instructions">
+      <p><strong>Note:</strong> If you're still seeing font or icon issues, try clearing your browser cache and refreshing the page.</p>
+    </div>
+    
+    <a href="index.html" class="btn">Return to Homepage</a>
+  </div>
+</body>
+</html> 
